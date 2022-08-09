@@ -141,7 +141,7 @@ The official AlphaFold parameters are made available under the terms of the [Cre
 
 ### Third-party Software License
 
-Use of the third-party software, libraries or code referred to in the Acknowledgements section above may be governed by separate terms and conditions or license provisions.
+Use of the third-party software, libraries or code referred to in the [Acknowledgements](https://github.com/biomap-research/xTrimoMultimer#Acknowledgements) section above may be governed by separate terms and conditions or license provisions.
 
 Your use of the third-party software, libraries or code is subject to any such terms and you should check that you can comply with any applicable restrictions or terms and conditions before use.
 
