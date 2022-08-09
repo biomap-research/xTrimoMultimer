@@ -522,7 +522,7 @@ def main(args):
                 tags[0],
             )
 
-        if os.path.exists(output_dir, "features.pkl") and not args.recompute:
+        if os.path.exists(os.path.join(output_dir, "features.pkl")) and not args.recompute:
             feature_dict = pickle.load(
                 open(os.path.join(output_dir, "features.pkl"), "rb")
             )
@@ -530,7 +530,7 @@ def main(args):
             feature_dict = data_processor.process_fasta(
                 fasta_path=fasta_path, alignment_dir=local_alignment_dir
             )
-            save_feature(feature_dict, fasta_path)
+            save_feature(feature_dict, fasta_path, output_dir)
 
         for model_name in model_names:
             model_name = model_name.strip()
@@ -590,9 +590,9 @@ def main(args):
                 "violations": None,
             }
 
+            this_amber_status = False
             if amber_status[-1]:
                 # run amber relax if previous trail is successful.
-                this_amber_status = False
                 try:
                     config = model_config(model_name)
                     amber_relaxer = relax.AmberRelaxation(**config.relax)
