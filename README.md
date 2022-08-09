@@ -124,6 +124,6 @@ AlphaFold's, OpenFold's and, by extension, xTrimoMultimer source code is license
 
 ## Reference
 
-- (OpenFold, Ahdritz, Gustaf and Bouatta .etc, 2021)[https://github.com/aqlaboratory/openfold/]
+- [OpenFold, Ahdritz, Gustaf and Bouatta .etc, 2021](https://github.com/aqlaboratory/openfold/)
 
-- (FastFold, Shenggan Cheng, Ruidong Wu and Zhongming Yu .etc)[https://github.com/hpcaitech/FastFold]
+- [FastFold, Shenggan Cheng, Ruidong Wu and Zhongming Yu .etc](https://github.com/hpcaitech/FastFold)
