@@ -118,12 +118,12 @@ Indicators in `[]` can be ignored or deleted to run all the test cases.
 
 ## Copyright Notice
 
-Caution: To deprecate our inner feature processing logics, OpenFold's data processing code has been greatly introduced before feature_processing parts. This may cause some problems, because the open source version of OpenFold's multimer has not yet published with comprehensive test. If there exists any problem on data processing parts, please feel free to leave a message on [Issue]()
+Caution: To deprecate our inner feature processing logics, OpenFold's data processing code has been greatly introduced before feature_processing parts. This may cause some problems, because the open source version of OpenFold's multimer has not yet published with comprehensive test. If there exists any problem on data processing parts, please feel free to leave a message on [Issues](https://github.com/biomap-research/xTrimoMultimer/issues) page.
 
 AlphaFold's, OpenFold's and, by extension, xTrimoMultimer source code is licensed under the permissive Apache Licence, Version 2.0.
 
 ## Reference
 
-(OpenFold, Ahdritz, Gustaf and Bouatta .etc, 2021)[https://github.com/aqlaboratory/openfold/]
+- (OpenFold, Ahdritz, Gustaf and Bouatta .etc, 2021)[https://github.com/aqlaboratory/openfold/]
 
-(FastFold, Shenggan Cheng, Ruidong Wu and Zhongming Yu .etc)[https://github.com/hpcaitech/FastFold]
+- (FastFold, Shenggan Cheng, Ruidong Wu and Zhongming Yu .etc)[https://github.com/hpcaitech/FastFold]
