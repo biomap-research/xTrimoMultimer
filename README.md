@@ -32,7 +32,9 @@ Noticed that one of the dependencies `colossalai` may need CUDA Toolkit to be co
 
 We will add a further switch to handle this problem.
 
-#### Patch openmm (Please change the `[PATH_TO_ENV]` to the envs path):
+#### Patch Openmm
+
+(Please change the `[PATH_TO_ENV]` to the envs path)
 
 ```bash
 pushd [PATH_TO_ENV]/lib/python3.7/site-packages/ && patch -p0 < ./lib/openmm.patch && popd
@@ -58,7 +60,7 @@ To use container for reducing the influence of difference system package/configu
 
 The building command for the container is:
 
-```
+```bash
 docker buildx build . --file Dockerfile --tag extrememultimer
 ```
 
@@ -111,7 +113,7 @@ pip install -r requirements/test.txt
 
 To running all the test cases, execute the following command under the vritual environment:
 
-```
+```bash
 # Add -v for verbose mode
 pytest [the_path_to_special_test_file] [-v]
 ```
@@ -129,10 +131,52 @@ Indicators in `[]` can be ignored or deleted to run all the test cases.
 
 Caution: To deprecate our inner feature processing logics, OpenFold's data processing code has been greatly introduced before feature_processing parts. This may cause some problems, because the open source version of OpenFold's multimer has not yet published with comprehensive test. If there exists any problem on data processing parts, please feel free to leave a message on [Issues](https://github.com/biomap-research/xTrimoMultimer/issues) page.
 
+### Code License
+
 AlphaFold's, OpenFold's and, by extension, xTrimoMultimer source code is licensed under the permissive Apache Licence, Version 2.0.
+
+### Model Parameters License
+
+The official AlphaFold parameters are made available under the terms of the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/legalcode) license.
+
+### Third-party Software License
+
+Use of the third-party software, libraries or code referred to in the Acknowledgements section above may be governed by separate terms and conditions or license provisions.
+
+Your use of the third-party software, libraries or code is subject to any such terms and you should check that you can comply with any applicable restrictions or terms and conditions before use.
 
 ## Reference
 
-- [OpenFold, Ahdritz, Gustaf and Bouatta .etc, 2021](https://github.com/aqlaboratory/openfold/)
+- [AlphaFold, Jumper, John and Evans, Richard, etc., 2021](https://github.com/deepmind/alphafold)
 
-- [FastFold, Shenggan Cheng, Ruidong Wu and Zhongming Yu .etc](https://github.com/hpcaitech/FastFold)
+- [AlphaFold Multimer, Evans, Richard and ONeill, Michael, etc., 2022](https://github.com/deepmind/alphafold)
+
+- [OpenFold, Ahdritz, Gustaf and Bouatta, etc., 2021](https://github.com/aqlaboratory/openfold/)
+
+- [FastFold, Shenggan Cheng, Ruidong Wu and Zhongming Yu, etc., 2022](https://github.com/hpcaitech/FastFold)
+
+## Acknowledgements
+
+xTrimoMultimer uses and/or references the following separate libraries and packages (ordered alphabetically):
+
+- [Biopython](https://biopython.org/)
+- [ColossalAI](https://github.com/hpcaitech/ColossalAI)
+- [DeepSpeed](https://github.com/microsoft/DeepSpeed)
+- [Docker](https://www.docker.com/)
+- [einops](https://github.com/arogozhnikov/einops)
+- [HH Suite](https://github.com/soedinglab/hh-suite)
+- [HMMER Suite](http://eddylab.org/software/hmmer)
+- [Kalign](https://msa.sbc.su.se/cgi-bin/msa.cgi)
+- [ML Collections](https://github.com/google/ml_collections)
+- [NumPy](https://numpy.org/)
+- [OpenMM](https://github.com/openmm/openmm)
+- [Pandas](https://pandas.pydata.org/)
+- [PDBFixer](https://github.com/openmm/pdbfixer)
+- [Pytorch](https://pytorch.org/)
+- [PyTorch Lightning](https://www.pytorchlightning.ai)
+- [PyYAML](https://pyyaml.org)
+- [Scipy](https://scipy.org/)
+- [Tqdm](https://github.com/tqdm/tqdm)
+- [Tree](https://github.com/deepmind/tree)
+
+Thanks for all their contributors and maintainers!
