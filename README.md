@@ -15,7 +15,8 @@ xTrimoMultimer is a cooperation project by [Biomap](https://www.biomap.com/en/) 
 ## Quick start
 
 We strongly recommend users follow this installation manual step by step.
-If you want to install all the packages, please refer to git wiki in this project.
+
+Choosing the way you feel comfortable between container environment and non-container environment. We have provide both way for users to make choice.
 
 ## Installation
 
@@ -41,6 +42,14 @@ pushd [PATH_TO_ENV]/lib/python3.7/site-packages/ && patch -p0 < ./lib/openmm.pat
 
 ```bash
 conda activate xtrimomultimer
+```
+
+#### Compile the acceleration modules
+
+Execute the following commands to compile the acceleration modules after first activation of your environment.
+
+```bash
+python setup.py install
 ```
 
 ### With Docker
