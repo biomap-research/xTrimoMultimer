@@ -64,6 +64,16 @@ if torch_major_version > 1 or (torch_major_version == 1 and torch_minor_version 
     torch.set_float32_matmul_precision("high")
 
 
+def get_chunk_size(seq_len):
+    if seq_len < 1024:
+        chunk_size = None
+    elif seq_len < 2048:
+        chunk_size = 64
+    else:
+        chunk_size = 1
+    return chunk_size
+
+
 def precompute_alignments(tags, seqs, alignment_dir, args):
     for tag, seq in zip(tags, seqs):
         tmp_fasta_path = os.path.join(args.output_dir, f"tmp_{os.getpid()}.fasta")
@@ -365,8 +375,8 @@ def predict_structure(
     os.makedirs(output_dir, exist_ok=True)
 
     if is_fastfold_optimize:
-        model.globals.chunk_size = 64
-        set_chunk_size(64)
+        model.globals.chunk_size = get_chunk_size(processed_feature_dict["aatype"].shape[0])
+        set_chunk_size(model.globals.chunk_size)
 
     batch = processed_feature_dict
     with torch.no_grad():
