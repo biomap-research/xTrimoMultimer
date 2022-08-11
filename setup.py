@@ -155,7 +155,7 @@ setup(
     version="0.1.0-beta",
     packages=find_packages(exclude=["tests", "scripts"]),
     description="Optimizing Protein Structure Prediction Model Training and Inference on GPU Clusters",
-    author="Biomap",
+    author="BioMap",
     ext_modules=ext_modules,
     package_data={"xtrimomultimer": ["model_acc/kernel/cuda_native/csrc/*"]},
     cmdclass={"build_ext": BuildExtension} if ext_modules else {},

@@ -6,7 +6,7 @@
 
 Optimizing Protein Structure Prediction Model for both monomer and multimer on GPU Clusters
 
-xTrimoMultimer is a cooperation project by [Biomap](https://www.biomap.com/en/) and [HPC-AI TECH](https://www.hpcaitech.com) which provides a **high-performance implementation of AlphaFold and AlphaFold Multimer** with the following characteristics.
+xTrimoMultimer is a cooperation project by [BioMap](https://www.biomap.com/en/) and [HPC-AI TECH](https://www.hpcaitech.com) which provides a **high-performance implementation of AlphaFold and AlphaFold Multimer** with the following characteristics.
 
 1. Fast kernel performance on GPU platform.
 2. Supporting Various Parallelism including Dynamic Axial Parallelism(DAP) by [FastFold](https://github.com/hpcaitech/FastFold) in multi-GPU environment for both AlphaFold monomer and multimer.
