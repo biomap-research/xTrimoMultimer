@@ -61,7 +61,7 @@ To use container for reducing the influence of difference system package/configu
 The building command for the container is:
 
 ```bash
-docker buildx build . --file Dockerfile --tag extrememultimer
+docker buildx build . --file Dockerfile --tag xtrimomultimer:latest
 ```
 
 ## Usage
