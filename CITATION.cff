@@ -1,0 +1,37 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: xTrimoMultimer
+message: Citing xTrimoMultimer.
+type: software
+authors:
+  - given-names: Shenggan
+    family-names: Cheng
+    affiliation: HPC-AI Technology Inc.
+  - given-names: Chuang
+    family-names: Yu
+    affiliation: >-
+      BioMap (Beijing) Intelligence Technology
+      Limited
+    email: yuchuang@biomap.com
+  - given-names: Hailin
+    family-names: Wang
+    email: hailin@biomap.com
+    affiliation: >-
+      BioMap (Beijing) Intelligence Technology
+      Limited
+    orcid: 'https://orcid.org/0000-0002-5244-5605'
+  - given-names: Hui
+    family-names: Li
+    affiliation: >-
+      BioMap (Beijing) Intelligence Technology
+      Limited
+    email: lihui@biomap.com
+  - given-names: Le
+    family-names: Song
+    affiliation: >-
+      BioMap (Beijing) Intelligence Technology
+      Limited
+    email: songle@biomap.com
+license: Apache-2.0
