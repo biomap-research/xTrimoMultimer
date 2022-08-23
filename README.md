@@ -5,6 +5,8 @@
 [![DOI](https://zenodo.org/badge/519059101.svg)](https://zenodo.org/badge/latestdoi/519059101)
 [![GitHub license](https://img.shields.io/github/license/biomap-research/xTrimoMultimer)](https://github.com/biomap-research/xTrimoMultimer/blob/main/LICENSE)
 
+![Sample](/assets/sample.png)
+
 Optimizing Protein Structure Prediction Model for both monomer and multimer on GPU Clusters
 
 xTrimoMultimer is a cooperation project by [BioMap](https://www.biomap.com/en/) and [HPC-AI TECH](https://www.hpcaitech.com) which provides a **high-performance implementation of AlphaFold and AlphaFold Multimer** with the following characteristics.
