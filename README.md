@@ -2,6 +2,7 @@
 
 ![](https://img.shields.io/badge/Made%20with-ColossalAI-blueviolet?style=flat)
 ![](https://img.shields.io/github/v/release/biomap-research/xTrimoMultimer)
+[![DOI](https://zenodo.org/badge/519059101.svg)](https://zenodo.org/badge/latestdoi/519059101)
 [![GitHub license](https://img.shields.io/github/license/biomap-research/xTrimoMultimer)](https://github.com/biomap-research/xTrimoMultimer/blob/main/LICENSE)
 
 Optimizing Protein Structure Prediction Model for both monomer and multimer on GPU Clusters
