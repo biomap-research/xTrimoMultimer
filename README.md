@@ -6,6 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/biomap-research/xTrimoMultimer)](https://github.com/biomap-research/xTrimoMultimer/blob/main/LICENSE)
 
 ![Sample](/assets/sample.png)
+_Figure: Comparison of xTrimoMultimer's prediction to the predicted structure of AlphaFold2-Multimer on PDB 3G6D._
 
 Optimizing Protein Structure Prediction Model for both monomer and multimer on GPU Clusters
 
