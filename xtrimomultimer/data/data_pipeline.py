@@ -235,9 +235,6 @@ def make_msa_features(
             if sequence in seen_sequences:
                 continue
             seen_sequences.add(sequence)
-            import pdb
-
-            pdb.set_trace()
             int_msa.append(
                 [residue_constants.HHBLITS_AA_TO_ID[res] for res in sequence]
             )
