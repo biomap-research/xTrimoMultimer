@@ -29,7 +29,7 @@ Choosing the way you feel comfortable between container environment and non-cont
 Create the virtual environment by the `environment.yaml` we provide:
 
 ```bash
-conda create -n xtrimomultimer -f requirements/environment.yaml
+conda env create -n xtrimomultimer -f requirements/environment.yaml
 ```
 
 Noticed that one of the dependencies `colossalai` may need CUDA Toolkit to be correctly installed. Installation under machine without NVIDIA GPU and CUDA thus may fail.
