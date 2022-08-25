@@ -62,7 +62,7 @@ python setup.py install
 
 To use container for reducing the influence of difference system package/configuration, a Dockerfile is provided. Since this dockerfile is written in version 1.4 of Dockerfile syntax version, we need a extention provided by the Docker officially. If you cannot find the command `docker buildx`, a detailed manual installation guide on this extension can be found in [this webpage](https://docs.docker.com/build/buildx/install/).
 
-The building command for the container is:
+The building command for a image that contains execution environment is:
 
 ```bash
 docker buildx build . --file Dockerfile --tag xtrimomultimer:latest
