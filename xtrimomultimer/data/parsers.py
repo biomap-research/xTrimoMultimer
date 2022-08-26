@@ -654,18 +654,3 @@ def parse_hmmsearch_sto(
         query_sequence=input_sequence, a3m_string=a3m_string, skip_first=False
     )
     return template_hits
-
-
-def parse_e_values_from_tblout(tblout: str) -> Dict[str, float]:
-    """Parse target to e-value mapping parsed from Jackhmmer tblout string."""
-    e_values = {"query": 0}
-    lines = [line for line in tblout.splitlines() if line[0] != "#"]
-    # As per http://eddylab.org/software/hmmer/Userguide.pdf fields are
-    # space-delimited. Relevant fields are (1) target name:  and
-    # (5) E-value (full sequence) (numbering from 1).
-    for line in lines:
-        fields = line.split()
-        e_value = fields[4]
-        target_name = fields[0]
-        e_values[target_name] = float(e_value)
-    return e_values
