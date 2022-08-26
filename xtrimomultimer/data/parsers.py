@@ -252,7 +252,10 @@ def convert_stockholm_to_a3m(
     if remove_first_row_gaps:
         # query_sequence is assumed to be the first sequence
         query_sequence = next(iter(sequences.values()))
-        query_non_gaps = [res != "-" for res in query_sequence]
+    else:
+        query_sequence = iter(sequences.values())
+    query_non_gaps = [res != "-" for res in query_sequence]
+
     for seqname, sto_sequence in sequences.items():
         # Dots are optional in a3m format and are commonly removed.
         out_sequence = sto_sequence.replace(".", "")
