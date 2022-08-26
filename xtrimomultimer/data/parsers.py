@@ -538,7 +538,7 @@ def parse_hhr(hhr_string: str) -> Sequence[TemplateHit]:
 
 def parse_e_values_from_tblout(tblout: str) -> Dict[str, float]:
     """Parse target to e-value mapping parsed from Jackhmmer tblout string."""
-    e_values = {"query": 0}
+    e_values = {"query": 0.}
     lines = [line for line in tblout.splitlines() if line[0] != "#"]
     # As per http://eddylab.org/software/hmmer/Userguide.pdf fields are
     # space-delimited. Relevant fields are (1) target name:  and
