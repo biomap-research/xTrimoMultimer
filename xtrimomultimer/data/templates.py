@@ -310,11 +310,11 @@ def _find_template_in_pdb(
 
     This method tries the three following things in order:
         1. Tries if there is an exact match in both the chain ID and the sequence.
-             If yes, the chain sequence is returned. Otherwise:
+            If yes, the chain sequence is returned. Otherwise:
         2. Tries if there is an exact match only in the sequence.
-             If yes, the chain sequence is returned. Otherwise:
+            If yes, the chain sequence is returned. Otherwise:
         3. Tries if there is a fuzzy match (X = wildcard) in the sequence.
-             If yes, the chain sequence is returned.
+            If yes, the chain sequence is returned.
     If none of these succeed, a SequenceNotInTemplateError is thrown.
 
     Args:
