@@ -1,4 +1,4 @@
-# Copyright 2022 BioMap
+# Copyright 2022 BioMap (Beijing) Intelligence Technology Limited
 # Copyright 2021 AlQuraishi Laboratory
 # Copyright 2021 DeepMind Technologies Limited
 #
