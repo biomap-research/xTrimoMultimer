@@ -32,7 +32,7 @@ class Msa:
 
     sequences: Sequence[str]
     deletion_matrix: DeletionMatrix
-    descriptions: Optional[Sequence[str]]
+    descriptions: Sequence[str]
 
     def __post_init__(self):
         if not (

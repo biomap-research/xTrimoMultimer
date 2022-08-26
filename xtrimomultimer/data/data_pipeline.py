@@ -637,7 +637,7 @@ class DataPipeline:
                 "msa": parsers.Msa(
                     sequences=[input_sequence],
                     deletion_matrix=[[0 for _ in input_sequence]],
-                    descriptions=None,
+                    descriptions=[""],
                 )
             }
 
