@@ -391,7 +391,7 @@ def deduplicate_stockholm_msa(stockholm_msa: str) -> str:
 
 def _get_hhr_line_regex_groups(
     regex_pattern: str, line: str
-) -> Sequence[Optional[str]]:
+) -> Sequence[str]:
     match = re.match(regex_pattern, line)
     if match is None:
         raise RuntimeError(f"Could not parse query line {line}")
