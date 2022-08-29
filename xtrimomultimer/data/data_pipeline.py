@@ -20,6 +20,7 @@ from typing import List, Mapping, Optional, Sequence, Any, Union
 import numpy as np
 
 from xtrimomultimer.data import templates, parsers, mmcif_parsing, msa_identifiers
+from xtrimomultimer.data.tools.base import MSARunner
 from xtrimomultimer.utils.general_utils import to_date
 from xtrimomultimer.np import residue_constants, protein
 from xtrimomultimer.data.utils.static import *
@@ -46,8 +47,8 @@ def empty_template_feats(n_res) -> FeatureDict:
 
 def make_template_features(
     input_sequence: str,
-    hits: Sequence[Any],
-    template_featurizer: Any,
+    hits: Mapping[str, Any],
+    template_featurizer: Optional[templates.TemplateHitFeaturizer],
     query_pdb_code: Optional[str] = None,
     query_release_date: Optional[str] = None,
 ) -> FeatureDict:
@@ -262,7 +263,7 @@ def make_msa_features(
 
 
 def run_msa_tool(
-    msa_runner,
+    msa_runner: MSARunner,
     fasta_path: str,
     msa_out_path: str,
     msa_format: List[str],
@@ -291,6 +292,8 @@ def run_msa_tool(
             f.write(result["a3m"])
 
         return result
+    else:
+        raise ValueError(f"Cannot find valid msa format in: {msa_format}")
 
 
 class AlignmentRunner:

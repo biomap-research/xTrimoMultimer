@@ -15,14 +15,15 @@
 
 """Library to run Jackhmmer from Python."""
 
-from concurrent import futures
 import glob
 import os
 import subprocess
 from typing import Any, Callable, Mapping, Optional, Sequence
 from urllib import request
-from xtrimomultimer.data import parsers
+from concurrent import futures
 
+from xtrimomultimer.data import parsers
+from xtrimomultimer.data.tools.base import MSARunner
 from xtrimomultimer.utils import general_utils as utils
 
 from xtrimomultimer.utils.logger import Logger
@@ -30,7 +31,7 @@ from xtrimomultimer.utils.logger import Logger
 logger = Logger.logger
 
 
-class Jackhmmer:
+class Jackhmmer(MSARunner):
     """Python wrapper of the Jackhmmer binary."""
 
     def __init__(

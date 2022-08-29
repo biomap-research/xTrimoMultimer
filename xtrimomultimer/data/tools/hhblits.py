@@ -19,6 +19,7 @@ import os
 import subprocess
 from typing import Any, Mapping, Optional, Sequence
 
+from xtrimomultimer.data.tools.base import MSARunner
 from xtrimomultimer.utils import general_utils as utils
 
 from xtrimomultimer.utils.logger import Logger
@@ -30,7 +31,7 @@ _HHBLITS_DEFAULT_P = 20
 _HHBLITS_DEFAULT_Z = 500
 
 
-class HHBlits:
+class HHBlits(MSARunner):
     """Python wrapper of the HHblits binary."""
 
     def __init__(
@@ -98,7 +99,9 @@ class HHBlits:
         self.p = p
         self.z = z
 
-    def query(self, input_fasta_path: str) -> Mapping[str, Any]:
+    def query(
+        self, input_fasta_path: str, max_sequences: int = -1
+    ) -> Sequence[Mapping[str, Any]]:
         """Queries the database using HHblits."""
         with utils.tmpdir_manager(base_dir="/tmp") as query_tmp_dir:
             a3m_path = os.path.join(query_tmp_dir, "output.a3m")
