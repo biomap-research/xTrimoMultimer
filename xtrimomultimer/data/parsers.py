@@ -389,9 +389,7 @@ def deduplicate_stockholm_msa(stockholm_msa: str) -> str:
     return "\n".join(filtered_lines) + "\n"
 
 
-def _get_hhr_line_regex_groups(
-    regex_pattern: str, line: str
-) -> Sequence[str]:
+def _get_hhr_line_regex_groups(regex_pattern: str, line: str) -> Sequence[str]:
     match = re.match(regex_pattern, line)
     if match is None:
         raise RuntimeError(f"Could not parse query line {line}")
@@ -538,7 +536,7 @@ def parse_hhr(hhr_string: str) -> Sequence[TemplateHit]:
 
 def parse_e_values_from_tblout(tblout: str) -> Dict[str, float]:
     """Parse target to e-value mapping parsed from Jackhmmer tblout string."""
-    e_values = {"query": 0.}
+    e_values = {"query": 0.0}
     lines = [line for line in tblout.splitlines() if line[0] != "#"]
     # As per http://eddylab.org/software/hmmer/Userguide.pdf fields are
     # space-delimited. Relevant fields are (1) target name:  and
