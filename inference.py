@@ -288,9 +288,13 @@ def get_args():
                 saved_emds.append(value.strip())
         args.saved_emds = saved_emds
 
-    if (args.model_preset == "monomer" and "multimer" in args.model_name) or (args.model_preset == "multimer" 
-        and any(["multimer" not in name for name in args.model_name.split(',')])):
-        raise ValueError(f"{args.model_preset} is set as preset but model_name contains model from another preset")
+    if (args.model_preset == "monomer" and "multimer" in args.model_name) or (
+        args.model_preset == "multimer"
+        and any(["multimer" not in name for name in args.model_name.split(",")])
+    ):
+        raise ValueError(
+            f"{args.model_preset} is set as preset but model_name contains model from another preset"
+        )
     elif args.model_preset not in ["monomer", "multimer"]:
         logger.error(f"unknown model_preset={args.model_preset}")
         raise NameError
@@ -375,7 +379,9 @@ def predict_structure(
     os.makedirs(output_dir, exist_ok=True)
 
     if is_fastfold_optimize:
-        model.globals.chunk_size = get_chunk_size(processed_feature_dict["aatype"].shape[0])
+        model.globals.chunk_size = get_chunk_size(
+            processed_feature_dict["aatype"].shape[0]
+        )
         set_chunk_size(model.globals.chunk_size)
 
     batch = processed_feature_dict
@@ -532,7 +538,10 @@ def main(args):
                 tags[0],
             )
 
-        if os.path.exists(os.path.join(output_dir, "features.pkl")) and not args.recompute:
+        if (
+            os.path.exists(os.path.join(output_dir, "features.pkl"))
+            and not args.recompute
+        ):
             feature_dict = pickle.load(
                 open(os.path.join(output_dir, "features.pkl"), "rb")
             )

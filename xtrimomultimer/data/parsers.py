@@ -32,7 +32,7 @@ class Msa:
 
     sequences: Sequence[str]
     deletion_matrix: DeletionMatrix
-    descriptions: Optional[Sequence[str]]
+    descriptions: Sequence[str]
 
     def __post_init__(self):
         if not (
@@ -103,18 +103,18 @@ def parse_stockholm(stockholm_string: str) -> Msa:
     """Parses sequences and deletion matrix from stockholm format alignment.
 
     Args:
-      stockholm_string: The string contents of a stockholm file. The first
-        sequence in the file should be the query sequence.
+        stockholm_string: The string contents of a stockholm file. The first
+            sequence in the file should be the query sequence.
 
     Returns:
-      A tuple of:
-        * A list of sequences that have been aligned to the query. These
-          might contain duplicates.
-        * The deletion matrix for the alignment as a list of lists. The element
-          at `deletion_matrix[i][j]` is the number of residues deleted from
-          the aligned sequence i at residue position j.
-        * The names of the targets matched, including the jackhmmer subsequence
-          suffix.
+        A tuple of:
+            * A list of sequences that have been aligned to the query. These
+                might contain duplicates.
+            * The deletion matrix for the alignment as a list of lists. The element
+                at `deletion_matrix[i][j]` is the number of residues deleted from
+                the aligned sequence i at residue position j.
+            * The names of the targets matched, including the jackhmmer subsequence
+            suffix.
     """
     name_to_sequence = collections.OrderedDict()
     for line in stockholm_string.splitlines():
@@ -165,17 +165,17 @@ def parse_a3m(a3m_string: str) -> Msa:
     """Parses sequences and deletion matrix from a3m format alignment.
 
     Args:
-      a3m_string: The string contents of a a3m file. The first sequence in the
-        file should be the query sequence.
+        a3m_string: The string contents of a a3m file. The first sequence in the
+            file should be the query sequence.
 
     Returns:
-      A tuple of:
-        * A list of sequences that have been aligned to the query. These
-          might contain duplicates.
-        * The deletion matrix for the alignment as a list of lists. The element
-          at `deletion_matrix[i][j]` is the number of residues deleted from
-          the aligned sequence i at residue position j.
-        * A list of descriptions, one per sequence, from the a3m file.
+        A tuple of:
+            * A list of sequences that have been aligned to the query. These
+                might contain duplicates.
+            * The deletion matrix for the alignment as a list of lists. The element
+                at `deletion_matrix[i][j]` is the number of residues deleted from
+                the aligned sequence i at residue position j.
+            * A list of descriptions, one per sequence, from the a3m file.
     """
     sequences, descriptions = parse_fasta(a3m_string)
     deletion_matrix = []
@@ -252,7 +252,10 @@ def convert_stockholm_to_a3m(
     if remove_first_row_gaps:
         # query_sequence is assumed to be the first sequence
         query_sequence = next(iter(sequences.values()))
-        query_non_gaps = [res != "-" for res in query_sequence]
+    else:
+        query_sequence = iter(sequences.values())
+    query_non_gaps = [res != "-" for res in query_sequence]
+
     for seqname, sto_sequence in sequences.items():
         # Dots are optional in a3m format and are commonly removed.
         out_sequence = sto_sequence.replace(".", "")
@@ -386,9 +389,7 @@ def deduplicate_stockholm_msa(stockholm_msa: str) -> str:
     return "\n".join(filtered_lines) + "\n"
 
 
-def _get_hhr_line_regex_groups(
-    regex_pattern: str, line: str
-) -> Sequence[Optional[str]]:
+def _get_hhr_line_regex_groups(regex_pattern: str, line: str) -> Sequence[str]:
     match = re.match(regex_pattern, line)
     if match is None:
         raise RuntimeError(f"Could not parse query line {line}")
@@ -535,7 +536,7 @@ def parse_hhr(hhr_string: str) -> Sequence[TemplateHit]:
 
 def parse_e_values_from_tblout(tblout: str) -> Dict[str, float]:
     """Parse target to e-value mapping parsed from Jackhmmer tblout string."""
-    e_values = {"query": 0}
+    e_values = {"query": 0.0}
     lines = [line for line in tblout.splitlines() if line[0] != "#"]
     # As per http://eddylab.org/software/hmmer/Userguide.pdf fields are
     # space-delimited. Relevant fields are (1) target name:  and
@@ -604,12 +605,12 @@ def parse_hmmsearch_a3m(
     """Parses an a3m string produced by hmmsearch.
 
     Args:
-      query_sequence: The query sequence.
-      a3m_string: The a3m string produced by hmmsearch.
-      skip_first: Whether to skip the first sequence in the a3m string.
+        query_sequence: The query sequence.
+        a3m_string: The a3m string produced by hmmsearch.
+        skip_first: Whether to skip the first sequence in the a3m string.
 
     Returns:
-      A sequence of `TemplateHit` results.
+        A sequence of `TemplateHit` results.
     """
     # Zip the descriptions and MSAs together, skip the first query sequence.
     parsed_a3m = list(zip(*parse_fasta(a3m_string)))
@@ -651,18 +652,3 @@ def parse_hmmsearch_sto(
         query_sequence=input_sequence, a3m_string=a3m_string, skip_first=False
     )
     return template_hits
-
-
-def parse_e_values_from_tblout(tblout: str) -> Dict[str, float]:
-    """Parse target to e-value mapping parsed from Jackhmmer tblout string."""
-    e_values = {"query": 0}
-    lines = [line for line in tblout.splitlines() if line[0] != "#"]
-    # As per http://eddylab.org/software/hmmer/Userguide.pdf fields are
-    # space-delimited. Relevant fields are (1) target name:  and
-    # (5) E-value (full sequence) (numbering from 1).
-    for line in lines:
-        fields = line.split()
-        e_value = fields[4]
-        target_name = fields[0]
-        e_values[target_name] = float(e_value)
-    return e_values

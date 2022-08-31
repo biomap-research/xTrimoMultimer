@@ -22,7 +22,7 @@ from absl import logging
 from xtrimomultimer.utils import general_utils as utils
 
 
-class Hmmbuild(object):
+class Hmmbuild:
     """Python wrapper of the hmmbuild binary."""
 
     def __init__(self, *, binary_path: str, singlemx: bool = False):

@@ -2,7 +2,11 @@
 
 ![](https://img.shields.io/badge/Made%20with-ColossalAI-blueviolet?style=flat)
 ![](https://img.shields.io/github/v/release/biomap-research/xTrimoMultimer)
+[![DOI](https://zenodo.org/badge/519059101.svg)](https://zenodo.org/badge/latestdoi/519059101)
 [![GitHub license](https://img.shields.io/github/license/biomap-research/xTrimoMultimer)](https://github.com/biomap-research/xTrimoMultimer/blob/main/LICENSE)
+
+![Sample](/assets/sample.png)
+_Figure: Comparison of xTrimoMultimer's prediction to the predicted structure of AlphaFold2-Multimer on PDB 3G6D._
 
 Optimizing Protein Structure Prediction Model for both monomer and multimer on GPU Clusters
 
@@ -25,7 +29,7 @@ Choosing the way you feel comfortable between container environment and non-cont
 Create the virtual environment by the `environment.yaml` we provide:
 
 ```bash
-conda create -n xtrimomultimer -y requirements/environment.yaml
+conda env create -n xtrimomultimer -f requirements/environment.yaml
 ```
 
 Noticed that one of the dependencies `colossalai` may need CUDA Toolkit to be correctly installed. Installation under machine without NVIDIA GPU and CUDA thus may fail.
@@ -58,7 +62,7 @@ python setup.py install
 
 To use container for reducing the influence of difference system package/configuration, a Dockerfile is provided. Since this dockerfile is written in version 1.4 of Dockerfile syntax version, we need a extention provided by the Docker officially. If you cannot find the command `docker buildx`, a detailed manual installation guide on this extension can be found in [this webpage](https://docs.docker.com/build/buildx/install/).
 
-The building command for the container is:
+The building command for a image that contains execution environment is:
 
 ```bash
 docker buildx build . --file Dockerfile --tag xtrimomultimer:latest

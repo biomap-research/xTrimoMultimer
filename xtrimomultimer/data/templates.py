@@ -160,8 +160,8 @@ def make_empty_template(query_sequence, is_multimer):
     #     'template_all_atom_mask': np.zeros((1, num_res, residue_constants.atom_type_num), np.float32),
     #     'template_all_atom_positions': np.zeros((1, num_res, residue_constants.atom_type_num, 3),
     #                                             np.float32),
-    #     'template_domain_names': np.array([''.encode()], dtype=np.object),
-    #     'template_sequence': np.array([''.encode()], dtype=np.object),
+    #     'template_domain_names': np.array([''.encode()], dtype=np.object_),
+    #     'template_sequence': np.array([''.encode()], dtype=np.object_),
     #     'template_sum_probs': np.array([1, 1], dtype=np.float32)
     # }
 
@@ -186,8 +186,8 @@ def make_empty_template(query_sequence, is_multimer):
             "template_all_atom_positions": np.zeros(
                 (1, num_res, residue_constants.atom_type_num, 3), np.float32
             ),
-            "template_domain_names": np.array(["".encode()], dtype=np.object),
-            "template_sequence": np.array(["".encode()], dtype=np.object),
+            "template_domain_names": np.array(["".encode()], dtype=np.object_),
+            "template_sequence": np.array(["".encode()], dtype=np.object_),
             "template_sum_probs": np.array([0], dtype=np.float32),
         }
     )
@@ -310,11 +310,11 @@ def _find_template_in_pdb(
 
     This method tries the three following things in order:
         1. Tries if there is an exact match in both the chain ID and the sequence.
-             If yes, the chain sequence is returned. Otherwise:
+            If yes, the chain sequence is returned. Otherwise:
         2. Tries if there is an exact match only in the sequence.
-             If yes, the chain sequence is returned. Otherwise:
+            If yes, the chain sequence is returned. Otherwise:
         3. Tries if there is a fuzzy match (X = wildcard) in the sequence.
-             If yes, the chain sequence is returned.
+            If yes, the chain sequence is returned.
     If none of these succeed, a SequenceNotInTemplateError is thrown.
 
     Args:
@@ -440,9 +440,10 @@ def _realign_pdb_template_to_query(
             )
 
     try:
-        (old_aligned_template, new_aligned_template), _ = parsers.parse_a3m(
+        msa = parsers.parse_a3m(
             aligner.align([old_template_sequence, new_template_sequence])
         )
+        (old_aligned_template, new_aligned_template) = msa.sequences
     except Exception as e:
         raise QueryToTemplateAlignError(
             "Could not align old template %s to template %s (%s_%s). Error: %s"
@@ -852,6 +853,7 @@ def _process_single_hit(
             hit=hit,
             hit_pdb_code=hit_pdb_code,
             query_sequence=query_sequence,
+            query_pdb_code=None,
             release_dates=release_dates,
             release_date_cutoff=max_template_date,
         )
@@ -1310,8 +1312,8 @@ class HmmsearchHitFeaturizer(TemplateHitFeaturizer):
                 "template_all_atom_positions": np.zeros(
                     (1, num_res, residue_constants.atom_type_num, 3), np.float32
                 ),
-                "template_domain_names": np.array(["".encode()], dtype=np.object),
-                "template_sequence": np.array(["".encode()], dtype=np.object),
+                "template_domain_names": np.array(["".encode()], dtype=object),
+                "template_sequence": np.array(["".encode()], dtype=object),
                 "template_sum_probs": np.array([0], dtype=np.float32),
             }
             if is_multimer:

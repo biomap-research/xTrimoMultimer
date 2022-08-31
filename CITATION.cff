@@ -4,6 +4,7 @@
 cff-version: 1.2.0
 title: xTrimoMultimer
 message: Citing xTrimoMultimer.
+doi: 10.5281/zenodo.7016056
 type: software
 authors:
   - given-names: Shenggan

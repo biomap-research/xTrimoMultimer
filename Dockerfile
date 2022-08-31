@@ -19,34 +19,35 @@ RUN <<eot bash
 eot
 
 COPY requirements /opt/xTrimoMultimer/requirements
-RUN <<eot bash
-    mkdir /root/.pip
-    touch /root/.pip/pip.conf
-    cat >> /root/.pip/pip.conf<< EOF
-[global]
-index-url = https://pypi.tuna.tsinghua.edu.cn/simple
-EOF
-    mkdir /etc/conda/
-    touch /etc/conda/condarc
-    cat >> /etc/conda/condarc<< EOF
-channels:
-  - defaults
-show_channel_urls: true
-default_channels:
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-custom_channels:
-  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
-EOF
-    cat /etc/conda/condarc
-eot
+# Uncomment the following line to enable fast package install in Mainland China
+# RUN <<eot bash
+#     mkdir /root/.pip
+#     touch /root/.pip/pip.conf
+#     cat >> /root/.pip/pip.conf<< EOF
+# [global]
+# index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+# EOF
+#     mkdir /etc/conda/
+#     touch /etc/conda/condarc
+#     cat >> /etc/conda/condarc<< EOF
+# channels:
+#   - defaults
+# show_channel_urls: true
+# default_channels:
+#   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+#   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+#   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+# custom_channels:
+#   conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+#   msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+#   bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+#   menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+#   pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+#   pytorch-lts: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+#   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+# EOF
+#     cat /etc/conda/condarc
+# eot
 
 # installing into the base environment since the docker container wont do anything other than run xtrimomultimer
 RUN --mount=type=cache,target=/opt/conda/pkgs micromamba create -n xtrimomultimer -f /opt/xTrimoMultimer/requirements/environment.yaml -y  && micromamba clean --all
