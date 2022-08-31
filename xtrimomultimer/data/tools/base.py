@@ -21,3 +21,19 @@ class MSARunner(ABC):
     @abstractmethod
     def query(self, fasta_path: str, max_sequences: Optional[int] = None) -> Sequence[Mapping[str, Any]]:
         pass
+
+class TemplateSearcher(ABC):
+    
+    @property
+    @abstractmethod
+    def input_format(self):
+        pass
+
+    @property
+    @abstractmethod
+    def output_format(self):
+        pass
+    
+    @abstractmethod
+    def query(self, source: str, output_dir: Optional[str] = None) -> str:
+        pass

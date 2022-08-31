@@ -16,15 +16,15 @@
 
 import os
 from multiprocessing import cpu_count
-from typing import List, Mapping, Optional, Sequence, Any, Union
+from typing import Dict, List, Mapping, Optional, Sequence, Any
 import numpy as np
 
 from xtrimomultimer.data import templates, parsers, mmcif_parsing, msa_identifiers
-from xtrimomultimer.data.tools.base import MSARunner
+from xtrimomultimer.data.tools.base import MSARunner, TemplateSearcher
 from xtrimomultimer.utils.general_utils import to_date
 from xtrimomultimer.np import residue_constants, protein
 from xtrimomultimer.data.utils.static import *
-from xtrimomultimer.data.tools import jackhmmer, hhblits, hhsearch, hmmsearch
+from xtrimomultimer.data.tools import jackhmmer, hhblits, hhsearch
 
 
 from xtrimomultimer.utils.logger import Logger
@@ -33,10 +33,8 @@ logger = Logger.logger
 
 
 FeatureDict = Mapping[str, np.ndarray]
-TemplateSearcher = Union[hhsearch.HHSearch, hmmsearch.Hmmsearch]
 
-
-def empty_template_feats(n_res) -> FeatureDict:
+def empty_template_feats(n_res: int) -> FeatureDict:
     return {
         "template_aatype": np.zeros((0, n_res)).astype(np.int64),
         "template_all_atom_positions": np.zeros((0, n_res, 37, 3)).astype(np.float32),
@@ -59,7 +57,7 @@ def make_template_features(
         templates_result = template_featurizer.get_templates(
             query_sequence=input_sequence,
             query_pdb_code=query_pdb_code,
-            query_release_date=query_release_date,
+            query_release_date=to_date(query_release_date) if query_release_date else None,
             hits=hits_cat,
         )
         template_features = templates_result.features
@@ -543,7 +541,7 @@ class DataPipeline:
         self,
         alignment_dir: str,
         alignment_index: Optional[Any] = None,
-    ) -> Mapping[str, Any]:
+    ) -> Dict[str, Any]:
         msa_data = {}
         if alignment_index is not None:
             fp = open(os.path.join(alignment_dir, alignment_index["db"]), "rb")
@@ -560,9 +558,7 @@ class DataPipeline:
                     msa = parsers.parse_a3m(read_msa(start, size))
                     data = {"msa": msa}
                 elif ext == ".sto":
-                    msa, deletion_matrix, _ = parsers.parse_stockholm(
-                        read_msa(start, size)
-                    )
+                    msa = parsers.parse_stockholm(read_msa(start, size))
                     data = {"msa": msa}
                 else:
                     continue

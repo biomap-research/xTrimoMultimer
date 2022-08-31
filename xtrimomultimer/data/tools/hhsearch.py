@@ -17,8 +17,9 @@
 import glob
 import os
 import subprocess
-from typing import Sequence
+from typing import Optional, Sequence
 
+from xtrimomultimer.data.tools.base import TemplateSearcher
 from xtrimomultimer.utils import general_utils as utils
 
 from xtrimomultimer.utils.logger import Logger
@@ -26,7 +27,7 @@ from xtrimomultimer.utils.logger import Logger
 logger = Logger.logger
 
 
-class HHSearch:
+class HHSearch(TemplateSearcher):
     """Python wrapper of the HHsearch binary."""
 
     def __init__(
@@ -40,16 +41,16 @@ class HHSearch:
         """Initializes the Python HHsearch wrapper.
 
         Args:
-          binary_path: The path to the HHsearch executable.
-          databases: A sequence of HHsearch database paths. This should be the
-            common prefix for the database files (i.e. up to but not including
-            _hhm.ffindex etc.)
-          n_cpu: The number of CPUs to use
-          maxseq: The maximum number of rows in an input alignment. Note that this
-            parameter is only supported in HHBlits version 3.1 and higher.
+            binary_path: The path to the HHsearch executable.
+            databases: A sequence of HHsearch database paths. This should be the
+                common prefix for the database files (i.e. up to but not including
+                _hhm.ffindex etc.)
+            n_cpu: The number of CPUs to use
+            maxseq: The maximum number of rows in an input alignment. Note that this
+                parameter is only supported in HHBlits version 3.1 and higher.
 
         Raises:
-          RuntimeError: If HHsearch binary not found within the path.
+            RuntimeError: If HHsearch binary not found within the path.
         """
         self.binary_path = binary_path
         self.databases = databases
@@ -61,11 +62,20 @@ class HHSearch:
                 logger.error("Could not find HHsearch database %s", database_path)
                 raise ValueError(f"Could not find HHsearch database {database_path}")
 
-    def query(self, a3m: str) -> str:
+    @property
+    def output_format(self) -> str:
+        return 'hhr'
+
+    @property
+    def input_format(self) -> str:
+        return 'a3m'
+
+    def query(self, a3m: str, output_dir: Optional[str] = None) -> str:
         """Queries the database using HHsearch using a given a3m."""
         with utils.tmpdir_manager(base_dir="/tmp") as query_tmp_dir:
             input_path = os.path.join(query_tmp_dir, "query.a3m")
-            hhr_path = os.path.join(query_tmp_dir, "output.hhr")
+            output_dir = query_tmp_dir if output_dir is None else output_dir
+            hhr_path = os.path.join(output_dir, "output.hhr")
             with open(input_path, "w") as f:
                 f.write(a3m)
 

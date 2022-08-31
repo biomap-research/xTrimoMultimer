@@ -20,6 +20,7 @@ from typing import Optional, Sequence
 
 from xtrimomultimer.data import parsers
 from xtrimomultimer.data.tools import hmmbuild
+from xtrimomultimer.data.tools.base import TemplateSearcher
 from xtrimomultimer.utils import general_utils as utils
 
 from xtrimomultimer.utils.logger import Logger
@@ -27,7 +28,7 @@ from xtrimomultimer.utils.logger import Logger
 logger = Logger.logger
 
 
-class Hmmsearch(object):
+class Hmmsearch(TemplateSearcher):
     """Python wrapper of the hmmsearch binary."""
 
     def __init__(
