@@ -52,4 +52,4 @@ def to_date(s: str) -> datetime.datetime:
 
 
 def warmup_gpu_for_pytorch(device) -> torch.Tensor:
-    torch.tensor([0]).to(device)
+    return torch.tensor([0]).to(device)
