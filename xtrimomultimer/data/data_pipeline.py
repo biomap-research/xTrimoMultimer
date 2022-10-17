@@ -34,6 +34,7 @@ logger = Logger.logger
 
 FeatureDict = Mapping[str, np.ndarray]
 
+
 def empty_template_feats(n_res: int) -> FeatureDict:
     return {
         "template_aatype": np.zeros((0, n_res)).astype(np.int64),
@@ -57,7 +58,9 @@ def make_template_features(
         templates_result = template_featurizer.get_templates(
             query_sequence=input_sequence,
             query_pdb_code=query_pdb_code,
-            query_release_date=to_date(query_release_date) if query_release_date else None,
+            query_release_date=to_date(query_release_date)
+            if query_release_date
+            else None,
             hits=hits_cat,
         )
         template_features = templates_result.features

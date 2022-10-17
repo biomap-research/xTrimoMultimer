@@ -64,11 +64,11 @@ class HHSearch(TemplateSearcher):
 
     @property
     def output_format(self) -> str:
-        return 'hhr'
+        return "hhr"
 
     @property
     def input_format(self) -> str:
-        return 'a3m'
+        return "a3m"
 
     def query(self, a3m: str, output_dir: Optional[str] = None) -> str:
         """Queries the database using HHsearch using a given a3m."""

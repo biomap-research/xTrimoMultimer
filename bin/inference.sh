@@ -1,4 +1,5 @@
-# --use_fastfold_optimize \
+#!/bin/bash
+
 python inference.py data/pdb_mmcif/mmcif_files/ \
     --fasta_paths target.fasta \
     --model_preset multimer \

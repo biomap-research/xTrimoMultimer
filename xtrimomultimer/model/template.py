@@ -233,14 +233,14 @@ class TemplatePairStackBlock(nn.Module):
                     self.tri_mul_in(single, mask=single_mask)
                 )
                 single = single + self.dropout_row(
-                    self.tri_att_start(single, chunk_size=chunk_size,mask=single_mask)
+                    self.tri_att_start(single, chunk_size=chunk_size, mask=single_mask)
                 )
                 single = single + self.dropout_col(
-                    self.tri_att_end(single, chunk_size=chunk_size, mask=single_mask
-                    )
+                    self.tri_att_end(single, chunk_size=chunk_size, mask=single_mask)
                 )
                 single = single + self.pair_transition(
-                    single, mask=single_mask if _mask_trans else None,
+                    single,
+                    mask=single_mask if _mask_trans else None,
                     chunk_size=chunk_size,
                 )
                 single_templates[i] = single
